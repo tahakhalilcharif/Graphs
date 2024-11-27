@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <time.h>
 
 typedef struct Edge {
     int to;
@@ -106,7 +107,14 @@ int main() {
     }
 
     currentPath[0] = source;
+
+
+    clock_t start_time = clock();
+
     dfs(graph, source, destination, 0, currentPath, 1, bestPath, &bestPathLength, &minCost, visited);
+
+    clock_t end_time = clock();
+    double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
     FILE* resultFile = fopen("results.csv", "w");
     fprintf(resultFile, "Source,Destination,ShortestPath,Cost\n");
@@ -117,7 +125,7 @@ int main() {
     } else {
         printf("Shortest path: ");
         fprintf(resultFile, "%d,%d,", source, destination);
-        for (i = 0; i < bestPathLength; i++) {
+        for ( i = 0; i < bestPathLength; i++) {
             printf("%d", bestPath[i]);
             fprintf(resultFile, "%d", bestPath[i]);
             if (i < bestPathLength - 1) {
@@ -129,6 +137,11 @@ int main() {
         fprintf(resultFile, ",%d\n", minCost);
     }
 
+
+     printf("Execution time: %f seconds\n", time_taken);
+    FILE* complexityFile = fopen("complexity.csv", "a");
+    fprintf(complexityFile, "%f\n", time_taken);
+    fclose(complexityFile);
     fclose(resultFile);
 
     for (i = 0; i < n; i++) {
