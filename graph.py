@@ -2,18 +2,14 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Load graph data
 graph_data = pd.read_csv('graph.csv')
 results_data = pd.read_csv('results.csv')
 
-# Create a directed graph
 G = nx.DiGraph()
 
-# Add edges from the graph.csv file
 for _, row in graph_data.iterrows():
     G.add_edge(row['From'], row['To'], weight=row['Weight'])
 
-# Plot and save the graph visualization
 pos = nx.spring_layout(G)
 labels = nx.get_edge_attributes(G, 'weight')
 plt.figure(figsize=(8, 6))
@@ -23,7 +19,6 @@ plt.title('Graph Visualization')
 plt.savefig('graph.png', format='png')
 plt.close()
 
-# Extract the shortest path from results.csv
 for _, row in results_data.iterrows():
     source = row['Source']
     destination = row['Destination']
@@ -32,7 +27,6 @@ for _, row in results_data.iterrows():
         cost = row['Cost']
         print(f"Shortest path from {source} to {destination}: {path} with cost {cost}")
         
-        # Highlight the shortest path
         path_edges = list(zip(path, path[1:]))
         plt.figure(figsize=(8, 6))
         nx.draw(G, pos, with_labels=True, node_color='lightgreen', node_size=500, font_size=10)

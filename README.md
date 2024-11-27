@@ -29,3 +29,7 @@ This project demonstrates how to find the shortest path between two nodes in a w
 Install the required Python packages using:
 ```bash
 pip install pandas networkx matplotlib
+```
+How to Run the Project
+Step 1: Compile and Run the C Program
+Compile the C program:
