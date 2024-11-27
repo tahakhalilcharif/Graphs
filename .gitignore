@@ -1,16 +1,24 @@
-*.pdf
-
-*.exe
 
 *.o
 *.out
-*.class
+*.exe
+*.pdf
 
-*.tmp
+/build/
+/bin/
+/obj/
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
 *.log
+*.bak
+*.tmp
+*.DS_Store
 
-__pycache__/
-*.pyc
+/tests/*.out
+/tests/*.exe
+/tests/*.o
 
-.DS_Store
-Thumbs.db
